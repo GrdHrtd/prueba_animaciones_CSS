@@ -1,0 +1,241 @@
+/* Estilos globales */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: grid;
+    grid-template-areas: 
+        "navbar"
+        "filtro"
+        "principal"
+        "paginacion"
+        "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto auto;
+    height: 100vh;
+}
+
+p {
+    margin: 0;
+}
+
+/* Navbar común */
+.navbar {
+    grid-area: navbar;
+    background-color: rgb(175, 190, 121);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(125, 26, 46);
+}
+
+.titbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title {
+    margin-left: 10px;
+    color: rgb(125, 26, 46);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.logo {
+    width: 60px;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+ul {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    display: inline;
+    padding: 0 10px;
+}
+
+.iconos {
+    display: flex;
+    align-items: center;
+    color: rgb(125, 26, 46);
+}
+
+/* Filtro común */
+.filtro {
+    grid-area: filtro;
+    background-color: rgb(166, 192, 71);
+    color: rgb(125, 26, 46);
+    text-align: center;
+    padding: 10px;
+}
+
+.filtro select {
+    margin-top: 10px;
+    width: 80%;
+    height: 30px;
+    color: rgb(125, 26, 46);
+}
+
+/* Principal común */
+.principal {
+    grid-area: principal;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.card {
+    background-color: rgb(249, 237, 177);
+    padding: 10px;
+    text-align: center;
+    color: rgb(125, 26, 46);
+}
+
+.item {
+    width: 200px; /* Ancho fijo para las imágenes */
+    height: auto;
+    margin: 0 auto; /* Centramos las imágenes dentro de su contenedor */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Transición combinada para múltiples propiedades */
+}
+
+.item:hover {
+    transform: scale(1.05); /* Aumentar el tamaño un 5% */
+    filter: grayscale(100%); /* Convertir a escala de grises */
+}
+
+button {
+    background-color: rgb(175, 190, 121);
+    color: rgb(125, 26, 46);
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* Paginación común */
+.paginacion {
+    grid-area: paginacion;
+    background-color: rgb(249, 237, 177);
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.paginacion a {
+    padding: 5px 10px;
+    border: 0.5px solid rgb(125, 26, 46);
+    border-radius: 4px;
+    text-decoration: none;
+    color: rgb(125, 26, 46);
+    transition: background-color 0.3s ease;
+}
+
+/* Footer común */
+.footer {
+    grid-area: footer;
+    background-color: rgb(166, 192, 71);
+    color: rgb(125, 26, 46);
+    text-align: center;
+    padding: 10px;
+}
+
+/* Estilos específicos para Mobile */
+@media (max-width: 576px) {
+    .navbar {
+        justify-content: space-between;
+    }
+    .iconos {
+        display: block;
+    }
+}
+
+/* Estilos específicos para Desktop */
+@media (min-width: 577px) {
+    body {
+        display: grid;
+        grid-template-areas: 
+            "sidebar header"
+            "sidebar filtro"
+            "sidebar main"
+            "sidebar pagination";
+        grid-template-columns: 310px 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        height: 100vh;
+    }
+
+    .navbar {
+        grid-area: sidebar;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: rgb(175, 190, 121);
+    }
+
+    .footer {
+        grid-area: sidebar;
+        align-self: flex-end;
+        background-color: rgb(166, 192, 71); /* Para que el fondo continúe */
+    }
+
+    ul {
+        display: block;
+        padding: 0;
+        margin: 0;
+        margin-top: 20px;
+    }
+
+    ul li {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .iconos {
+        display: none;
+    }
+
+    .filtro {
+        grid-area: filtro;
+        margin-top: 0; /* Elimina el margen superior */
+        background-color: rgb(166, 192, 71); /* Asegura que el fondo cubra toda el área */
+    }
+
+    .principal {
+        grid-area: main;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 10px;
+        overflow-y: auto; /* Scroll solo en la sección principal */
+        background-color: rgb(240, 237, 177);
+        padding: 20px; /* Añadimos un poco de espacio entre el borde y las tarjetas */
+    }
+
+    .paginacion {
+        grid-area: pagination;
+        justify-self: center;
+        width: 100%; /* Asegura que el fondo cubra todo el ancho */
+        box-sizing: border-box;
+    }
+}
